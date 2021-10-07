@@ -22,4 +22,4 @@ admin_username = "narain2992"
 # public_key_path = "/home/vsts/work/_temp/myKey.pub"
 
 # public key on Windows local machine
-  public_key_path = "~/.ssh/id_rsa"
+  public_key_path = "~/.ssh"
