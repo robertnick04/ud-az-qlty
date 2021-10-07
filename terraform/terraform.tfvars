@@ -19,7 +19,7 @@ packer_image   = "/subscriptions/086b84c2-b58a-4315-94c9-4bb08f54e9f5/resourceGr
 admin_username = "narain2992"
 
 # public key in azure pipelines
-#public_key_path = "/home/vsts/work/_temp/myKey.pub"
+# public_key_path = "/home/vsts/work/_temp/myKey.pub"
 
 # public key on Windows local machine
-public_key_path = "~/.ssh/id_rsa.pub"
+  public_key_path = "~/.ssh/id_rsa"
