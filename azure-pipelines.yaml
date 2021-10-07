@@ -11,7 +11,7 @@ trigger:
 name: Azure Pipelines
 variables:
   python.version: "3.7.6"
-  applicationname: 'jc-test2-AppService'
+  applicationname: 'ud-az-AppService'
 stages:
   - stage: ProvisionIaC
     displayName: Azure Resources Provisioning
