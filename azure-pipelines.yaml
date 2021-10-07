@@ -51,7 +51,7 @@ stages:
         inputs:
           provider: 'azurerm'
           command: 'init'
-          backendServiceArm: 'Quality-Releases'
+          backendServiceArm: 'ud-az-qlty-sc2'
           backendAzureRmResourceGroupName: 'tstate'
           backendAzureRmStorageAccountName: 'tstate3994'
           backendAzureRmContainerName: 'tstate'
@@ -64,7 +64,7 @@ stages:
           provider: 'azurerm'
           command: 'validate'
           workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
-          environmentServiceNameAzureRM: 'Quality-Releases'
+          environmentServiceNameAzureRM: 'ud-az-qlty-sc2'
       
       - task: TerraformTaskV1@0
         displayName: Terraform Plan
@@ -72,7 +72,7 @@ stages:
           provider: 'azurerm'
           command: 'plan'
           workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
-          environmentServiceNameAzureRM: 'Quality-Releases'
+          environmentServiceNameAzureRM: 'ud-az-qlty-sc2'
       
       - task: TerraformTaskV1@0
         displayName: Terraform Apply
@@ -82,7 +82,7 @@ stages:
           commandOptions: |
             -auto-approve
           workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
-          environmentServiceNameAzureRM: 'Quality-Releases'
+          environmentServiceNameAzureRM: 'ud-az-qlty-sc2'
 
   - stage: Build
     jobs:
@@ -146,7 +146,7 @@ stages:
             - task: AzureWebApp@1
               displayName: 'Deploy Azure Web App'
               inputs:
-                azureSubscription: 'Quality-Releases'
+                azureSubscription: 'ud-az-qlty-sc2'
                 appType: 'webAppLinux'
                 appName: $(applicationname)
                 package: '$(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip'
@@ -394,7 +394,7 @@ stages:
         inputs:
           provider: 'azurerm'
           command: 'init'
-          backendServiceArm: 'Quality-Releases'
+          backendServiceArm: 'ud-az-qlty-sc2'
           backendAzureRmResourceGroupName: 'tstate'
           backendAzureRmStorageAccountName: 'tstate3994'
           backendAzureRmContainerName: 'tstate'
@@ -409,4 +409,4 @@ stages:
           commandOptions: |
             -auto-approve
           workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
-          environmentServiceNameAzureRM: 'Quality-Releases'
+          environmentServiceNameAzureRM: 'ud-az-qlty-sc2'
