@@ -1,5 +1,5 @@
 resource "azurerm_network_interface" "test" {
-  name                = "udacity-project-3-NIC"
+  name                = "ud-az-qlty-NIC"
   location            = var.location
   resource_group_name = var.resource_group
 
