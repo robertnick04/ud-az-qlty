@@ -154,7 +154,8 @@ stages:
     - deployment: VMDeploy
       displayName: VM Deploy
       environment:
-        name:  'VM-TEST'
+        # name:  'VM-TEST'
+        name:  'WEBAPP-TEST'
         resourceType: VirtualMachine
       strategy:
         runOnce:
