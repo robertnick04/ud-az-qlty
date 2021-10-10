@@ -151,8 +151,7 @@ stages:
                 appName: $(applicationname)
                 package: '$(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip'
                 deploymentMethod: 'auto'
-
-                 - deployment: VMDeploy
+    - deployment: VMDeploy
       displayName: VM Deploy
       environment:
         name:  'VM-TEST'
