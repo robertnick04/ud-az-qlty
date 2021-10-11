@@ -339,73 +339,73 @@ stages:
                 targetPath: '$(System.DefaultWorkingDirectory)/log/selenium/selenium-test.log'
                 artifactName: 'drop-selenium-logs'
 
-#  - stage: WaitUserApproval
-#    displayName: User Approval
-#    jobs:
-#      - job: waitForValidation
-#        displayName: Wait for external validation
-#        pool: server
-#        timeoutInMinutes: 90 # job times out in 90 minutes
-#        steps:
-#        - task: ManualValidation@0
-#          timeoutInMinutes: 80 # task times out in 80 minutes
-#          inputs:
-#            notifyUsers: |
-#              jcdev@outlook.com
-#            instructions: 'Please validate the end of the Pipeline to destroy the Infraestructure'
-#            onTimeout: 'resume'
-#  
-#  - stage: DestroyIaC
-#    displayName: Destroy IaC
-#    jobs:
-#    - job: Destroy_Azure_IaC
-#      displayName: Destroy Azure IaC
-#      pool:
-#        vmImage: 'ubuntu-18.04'
-#      steps:
-#      - task: DownloadSecureFile@1
-#        name: tfvardef
-#        displayName: Download terraform.tfvars
-#        inputs:
-#          secureFile: 'terraform.tfvars'
-#
+  - stage: WaitUserApproval
+    displayName: User Approval
+    jobs:
+      - job: waitForValidation
+        displayName: Wait for external validation
+        pool: server
+        timeoutInMinutes: 90 # job times out in 90 minutes
+        steps:
+        - task: ManualValidation@0
+          timeoutInMinutes: 80 # task times out in 80 minutes
+          inputs:
+            notifyUsers: |
+              jcdev@outlook.com
+            instructions: 'Please validate the end of the Pipeline to destroy the Infraestructure'
+            onTimeout: 'resume'
+  
+  - stage: DestroyIaC
+    displayName: Destroy IaC
+    jobs:
+    - job: Destroy_Azure_IaC
+      displayName: Destroy Azure IaC
+      pool:
+        vmImage: 'ubuntu-18.04'
+      steps:
+      - task: DownloadSecureFile@1
+        name: tfvardef
+        displayName: Download terraform.tfvars
+        inputs:
+          secureFile: 'terraform.tfvars'
+
       # Needed for Terraform VM deployment
-#      - task: InstallSSHKey@0
-#        displayName: Security Access
-#        inputs:
-#          knownHostsEntry: 'ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ=='
-#          sshPublicKey: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCiEGN0fk7U5gYdqj1b1ijYG1483bhXVyIaZb90Vo/waX1OtvjV3Mc0lPfeOD9HFkhhcMSFzzEEBucFhhnhWP7IQES6+59JmLbklRtnY492sPURYunkHWaSJDGa4uwiFmxIcHTxBvAmVBOHJgs5RLqiSLDBAu6Q/dJYu85ykiPPlXByvbeZyAVuq6UdbOlWeVbB8NEjw1i63hDkT4etqOeOFM5Eq5wnamFGrOLpE9CRX6uzg7j1GN7T0DHu1PGPCbJMO8Lvg+byLn6evra1YH9VA7w3JBvwCU4/kUos7k0bauecA+ihvtZtpM8/EYa9D6eRZg4KGd3k5JnFFWRV4ZdNmG9JGZrNVcRXduJ6tmt+9sB1sKhLGC1sY6WFyYRdy6qgsVV808r8cqpvuFodBhb291AbJ3inQyIIVWPZ4xw7ZtKP14EqMuFoQXhz7VMda+nYVDYOAQPfGlswwZ3BuXhGtpFSLkN6NwPVW+S3EWD8kLE2Zb+5Z7XqnkoqVGRBVkM='
-#          sshKeySecureFile: 'id_rsa.pub'
-#      
-#      - task: Bash@3
-#        displayName: Copy terraform.tfvars
-#        inputs:
-#          targetType: 'inline'
-#          script: cp $(Agent.TempDirectory)/terraform.tfvars $(System.DefaultWorkingDirectory)/terraform
-#      
-#      - task: TerraformInstaller@0
-#        displayName: Install Terraform
-#        inputs:
-#          terraformVersion: '0.14.8'
-#      
-#      - task: TerraformTaskV1@0
-#        displayName: Terraform Init
-#        inputs:
-#          provider: 'azurerm'
-#          command: 'init'
-#          backendServiceArm: 'ud-az-qlty-sc2'
-#          backendAzureRmResourceGroupName: 'tstate'
-#          backendAzureRmStorageAccountName: 'tstate14074'
-#          backendAzureRmContainerName: 'tstate'
-#          backendAzureRmKey: 'terraform.tfstate'
-#          workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
-#      
-#      - task: TerraformTaskV1@0
-#        displayName: Terraform Apply
-#        inputs:
-#          provider: 'azurerm'
-#          command: 'destroy'
-#          commandOptions: |
-#            -auto-approve
-#          workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
-#          environmentServiceNameAzureRM: 'ud-az-qlty-sc2'
+      - task: InstallSSHKey@0
+        displayName: Security Access
+        inputs:
+          knownHostsEntry: 'ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ=='
+          sshPublicKey: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCiEGN0fk7U5gYdqj1b1ijYG1483bhXVyIaZb90Vo/waX1OtvjV3Mc0lPfeOD9HFkhhcMSFzzEEBucFhhnhWP7IQES6+59JmLbklRtnY492sPURYunkHWaSJDGa4uwiFmxIcHTxBvAmVBOHJgs5RLqiSLDBAu6Q/dJYu85ykiPPlXByvbeZyAVuq6UdbOlWeVbB8NEjw1i63hDkT4etqOeOFM5Eq5wnamFGrOLpE9CRX6uzg7j1GN7T0DHu1PGPCbJMO8Lvg+byLn6evra1YH9VA7w3JBvwCU4/kUos7k0bauecA+ihvtZtpM8/EYa9D6eRZg4KGd3k5JnFFWRV4ZdNmG9JGZrNVcRXduJ6tmt+9sB1sKhLGC1sY6WFyYRdy6qgsVV808r8cqpvuFodBhb291AbJ3inQyIIVWPZ4xw7ZtKP14EqMuFoQXhz7VMda+nYVDYOAQPfGlswwZ3BuXhGtpFSLkN6NwPVW+S3EWD8kLE2Zb+5Z7XqnkoqVGRBVkM='
+          sshKeySecureFile: 'id_rsa.pub'
+      
+      - task: Bash@3
+        displayName: Copy terraform.tfvars
+        inputs:
+          targetType: 'inline'
+          script: cp $(Agent.TempDirectory)/terraform.tfvars $(System.DefaultWorkingDirectory)/terraform
+      
+      - task: TerraformInstaller@0
+        displayName: Install Terraform
+        inputs:
+          terraformVersion: '0.14.8'
+      
+      - task: TerraformTaskV1@0
+        displayName: Terraform Init
+        inputs:
+          provider: 'azurerm'
+          command: 'init'
+          backendServiceArm: 'ud-az-qlty-sc2'
+          backendAzureRmResourceGroupName: 'tstate'
+          backendAzureRmStorageAccountName: 'tstate14074'
+          backendAzureRmContainerName: 'tstate'
+          backendAzureRmKey: 'terraform.tfstate'
+          workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
+      
+      - task: TerraformTaskV1@0
+        displayName: Terraform Apply
+        inputs:
+          provider: 'azurerm'
+          command: 'destroy'
+          commandOptions: |
+            -auto-approve
+          workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
+          environmentServiceNameAzureRM: 'ud-az-qlty-sc2'
