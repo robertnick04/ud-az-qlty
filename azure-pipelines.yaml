@@ -88,8 +88,8 @@ stages:
     jobs:
       - job: Build
         pool:
-          name: Hosted Ubuntu 1604
           vmImage: 'ubuntu-latest'
+          name: Hosted Ubuntu 1604
         steps:
           #- task: InstallSSHKey@0
           #  inputs:
