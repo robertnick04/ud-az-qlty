@@ -89,7 +89,9 @@ stages:
       - job: Build
         pool:
           vmImage: 'ubuntu-latest'
-          name: Hosted Agent
+          name: Default
+          demands:
+           - agent.name -equals 'Hosted Agent'
         steps:
           #- task: InstallSSHKey@0
           #  inputs:
