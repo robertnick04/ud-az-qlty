@@ -89,7 +89,7 @@ stages:
       - job: Build
         pool:
           vmImage: 'ubuntu-latest'
-          name: Azure Pipelines
+          name: Hosted Agent
         steps:
           #- task: InstallSSHKey@0
           #  inputs:
