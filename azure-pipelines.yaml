@@ -89,7 +89,7 @@ stages:
       - job: Build
         pool:
           vmImage: 'ubuntu-latest'
-          name: Hosted Ubuntu 1804
+          name: Azure Pipelines
         steps:
           #- task: InstallSSHKey@0
           #  inputs:
