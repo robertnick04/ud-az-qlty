@@ -89,9 +89,9 @@ stages:
       - job: Build
         pool:
           vmImage: 'ubuntu-latest'
-          name: Default
+          name: Azure Pipelines
           demands:
-           - agent.name -equals 'Hosted Agent'
+           - agent.name -equals Hosted Agent
         steps:
           #- task: InstallSSHKey@0
           #  inputs:
