@@ -137,7 +137,6 @@ stages:
     jobs:
     - deployment: FakeRestAPIDeploy
       pool:
-        name: Azure Pipelines
         vmImage: 'ubuntu-latest'
       environment: 'WEBAPP-TEST'
       strategy:
