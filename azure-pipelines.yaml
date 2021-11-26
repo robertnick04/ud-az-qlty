@@ -19,7 +19,7 @@ stages:
     - job: Provision_Azure_IaC
       displayName: Provision Azure IaC
       pool:
-        vmImage: 'ubuntu-latest'
+        vmImage: ubuntu-latest
       steps:
       - task: DownloadSecureFile@1
         name: tfvardef
@@ -88,7 +88,7 @@ stages:
     jobs:
       - job: Build
         pool:
-          vmImage: 'ubuntu-latest'
+          vmImage: ubuntu-latest
         steps:
           #- task: InstallSSHKey@0
           #  inputs:
@@ -130,14 +130,14 @@ stages:
         steps:
         - task: Delay@1
           inputs:
-            delayForMinutes: '5'
+            delayForMinutes: '3'
 
   - stage: Deployments
     displayName: Deployments
     jobs:
     - deployment: FakeRestAPIDeploy
       pool:
-        vmImage: 'ubuntu-latest'
+        vmImage: ubuntu-latest
       environment: 'WEBAPP-TEST'
       strategy:
         runOnce:
@@ -153,6 +153,8 @@ stages:
                 deploymentMethod: 'auto'
     - deployment: VMDeploy
       displayName: VM Deploy
+      pool:
+        vmImage: ubuntu-latest
       environment:
         name:  'VM-TEST'
         resourceType: VirtualMachine
